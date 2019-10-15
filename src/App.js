@@ -22,14 +22,6 @@ import Folder from './components/Folder';
   }
   
   render() {
-    // if (this.state.noteView) {
-    //   return (
-    //   <div className="App">
-    //     <Header />
-    //     <Note clickBack={this.clickBack} currNoteId={this.state.currNoteId} store={this.props.Store}/>
-    //   </div>
-    //   )
-    // }
     return (
     <div className="App">
       <Route 
@@ -39,7 +31,7 @@ import Folder from './components/Folder';
       />
       <Route 
         path="/folders/:folderId"
-        render={(props) => <Folder folders={this.props.Store.folders} notes={this.props.Store.notes.filter(itm => itm.folderId === props.match.params.folderId)}/>}
+        render={(props) => <Folder folderId={props.match.params.folderId} folders={this.props.Store.folders} notes={this.props.Store.notes.filter(itm => itm.folderId === props.match.params.folderId)}/>}
       />
       <Route 
         path="/notes/:noteId"

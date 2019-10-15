@@ -12,7 +12,7 @@ class Folder extends React.Component {
             <main>
             <Header clickHeader={this.props.clickHeader}/>
             <section className="folders">
-            <FoldersList clickFolder={this.props.clickFolder} folders={this.props.folders}/>
+            <FoldersList folderId={this.props.folderId} clickFolder={this.props.clickFolder} folders={this.props.folders}/>
             <AddFolder />
             </section>
             <section className="notes">
