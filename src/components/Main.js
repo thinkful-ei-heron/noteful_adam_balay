@@ -7,13 +7,7 @@ import AddNote from './AddNote'
 
 
 class Main extends React.Component {
-    state = {
-        active: null
-    }
-    clickFolder = (e) => {
-        const clicked = e.target.id
-        this.setState({active: clicked})
-    }
+   
     render() {
     return (
       <main>
