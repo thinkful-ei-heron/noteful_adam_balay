@@ -1,17 +1,18 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 
 class NotesList extends React.Component {
-    clickNote = (e) => {
-        this.props.clickNote(e.currentTarget.id)
-    }
+    
     render() {
         const notes = this.props.notes.map(itm => {
             const date= new Date(itm.modified).toDateString()
             return (
-            <li key={itm.id} id={itm.id} onClick={this.clickNote}>
+            <li key={itm.id} id={itm.id}>
+                <Link to={`/notes/${itm.id}`}>
                 <span>{itm.name}</span>
                 <span>Modified on: {date}</span>
+                </Link>
                 <button type="button">Delete</button>
             </li>
             )

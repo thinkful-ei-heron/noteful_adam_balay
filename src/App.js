@@ -1,9 +1,9 @@
 import React from 'react';
-import Header from './components/Header'
 import './App.css'
 import Note from './components/Note'
 import { Route } from 'react-router-dom'
 import Main from './components/Main'
+import Folder from './components/Folder';
 
 
 
@@ -15,50 +15,35 @@ import Main from './components/Main'
     currNoteId: null
   }
 
-  clickFolder = (folderId) => {
-    const newNotes = this.props.Store.notes.filter(itm => itm.folderId === folderId)
-    this.setState({
-      notes: newNotes
-    })
-  }
-
-  clickNote = (noteId) => {
-    this.setState({
-      noteView: !this.state.noteView,
-      currNoteId: noteId
-    })
-  }
-
   clickBack = () => {
     this.setState({
       noteView: !this.state.noteView
     })
   }
-
-  clickHeader = () => {
-    this.setState({
-      folders: this.props.Store.folders,
-      notes: this.props.Store.notes,
-      noteView: false,
-      currNoteId: null
-    })
-  }
   
   render() {
-    if (this.state.noteView) {
-      return (
-      <div className="App">
-        <Header clickHeader={this.clickHeader}/>
-        <Note clickBack={this.clickBack} currNoteId={this.state.currNoteId} store={this.props.Store}/>
-      </div>
-      )
-    }
+    // if (this.state.noteView) {
+    //   return (
+    //   <div className="App">
+    //     <Header />
+    //     <Note clickBack={this.clickBack} currNoteId={this.state.currNoteId} store={this.props.Store}/>
+    //   </div>
+    //   )
+    // }
     return (
     <div className="App">
       <Route 
         exact 
         path="/" 
-        render={() => <Main state={this.state} clickHeader={this.clickHeader} clickBack={this.clickBack} clickNote={this.clickNote} clickFolder={this.clickFolder}/>}
+        render={() => <Main state={this.state} clickBack={this.clickBack} />}
+      />
+      <Route 
+        path="/folders/:folderId"
+        render={(props) => <Folder folders={this.props.Store.folders} notes={this.props.Store.notes.filter(itm => itm.folderId === props.match.params.folderId)}/>}
+      />
+      <Route 
+        path="/notes/:noteId"
+        render={(props) => <Note history={props.history} folders={this.props.Store.folders} note={this.props.Store.notes.filter(itm => itm.id === props.match.params.noteId)}/>}
       />
     </div>
   )

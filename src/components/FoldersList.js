@@ -1,19 +1,22 @@
 import React from 'react'
 import './FoldersList.css'
+import { Link } from 'react-router-dom'
 
 class FoldersList extends React.Component {
+    state = {
+        active: null
+    }
     clickFolder = (e) => {
-        this.props.clickFolder(e.target.id)
+        const clicked = e.target.id
+        this.setState({active: clicked})
     }
     render() {
         const folders = this.props.folders.map(itm => {
-            return <li key={itm.id} id={itm.id} onClick={this.clickFolder}>{itm.name}</li>
+            return <Link to={`/folders/${itm.id}`} key={itm.id}><div id={itm.id} className={(this.state.active === itm.id) ? 'folder active' : 'folder'} onClick={this.clickFolder}>{itm.name}</div></Link>
         })
         return (
             <div className="folderlist">
-                <ul>
-                    {folders}
-                </ul>
+                {folders}
             </div>
         )
     }

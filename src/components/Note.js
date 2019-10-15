@@ -5,22 +5,23 @@ class Note extends React.Component {
         this.props.clickBack()
     }
     render() {
-        const currNote = this.props.store.notes.find(itm => itm.id === this.props.currNoteId)
-        const folder = this.props.store.folders.find(itm => itm.id === currNote.folderId)
-        const date = new Date(currNote.modified).toDateString()
+        console.log(this.props.history)
+        const currNote = this.props.note
+        const folder = this.props.folders.find(itm => itm.id === currNote[0].folderId)
+        const date = new Date(currNote[0].modified).toDateString()
         return (
             <div className="noteview">
                 <div className="back_folder">
-                    <button type="button" onClick={this.clickBack}>Go Back</button>
+                    <button type="button" onClick={this.props.history.goBack}>Go Back</button>
                     <span>{folder.name}</span>
                 </div>
                 <div>
                     <div>
-                    <span>{currNote.name}</span>
+                    <span>{currNote[0].name}</span>
                     <span>Modified on: {date}</span>
                     <button type="button">Delete</button>
                     </div>
-                    <p>{currNote.content}</p>
+                    <p>{currNote[0].content}</p>
                 </div>
             </div>
         )

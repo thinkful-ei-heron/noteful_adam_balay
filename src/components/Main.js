@@ -7,16 +7,23 @@ import AddNote from './AddNote'
 
 
 class Main extends React.Component {
+    state = {
+        active: null
+    }
+    clickFolder = (e) => {
+        const clicked = e.target.id
+        this.setState({active: clicked})
+    }
     render() {
     return (
       <main>
       <Header clickHeader={this.props.clickHeader}/>
       <section className="folders">
-        <FoldersList clickFolder={this.props.clickFolder} folders={this.props.state.folders}/>
+        <FoldersList folders={this.props.state.folders}/>
         <AddFolder />
       </section>
       <section className="notes">
-        <NotesList clickNote={this.props.clickNote} notes={this.props.state.notes}/>
+        <NotesList notes={this.props.state.notes}/>
         <AddNote />
       </section>
       </main>
